@@ -17,6 +17,8 @@ L'architecture suit le modèle **Medallion Architecture** avec trois couches :
 
 ### Couches de l'Architecture Medallion
 
+![Data_Arch](https://github.com/bey-adlane/sql_data_warehouse_procejt/blob/f1fc30efcf653b7b10c3cd5cbf4a8cfc1d0dae37/docs/Data_Arch.png)
+
 * **Couche Bronze (Bronze Layer)** :
     * Stocke les données brutes (*raw data*) telles quelles provenant des systèmes sources.
     * Les données sont ingérées à partir de fichiers CSV vers une base de données SQL Server.
