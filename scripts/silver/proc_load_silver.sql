@@ -166,6 +166,7 @@ BEGIN
 			WHEN sls_sales IS NULL OR sls_sales <= 0 OR sls_sales != sls_quantity * ABS(sls_price)
 			THEN sls_quantity * ABS(sls_price)
 		END sls_sales,
+		
 
 		sls_quantity,
 
@@ -291,4 +292,4 @@ END
 
 
 --Exemple d'utilisation :
-EXEC bronze.load_bronze
+EXEC silver.load_silver
