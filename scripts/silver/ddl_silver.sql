@@ -1,3 +1,15 @@
+/*
+===============================================================================
+Script DDL : Création des tables Silver
+===============================================================================
+Objectif du script :
+
+Ce script crée des tables dans le schéma « silver », en supprimant les tables existantes
+
+le cas échéant., Exécutez ce script pour redéfinir la structure DDL des tables « Silver ».
+===============================================================================
+*/
+
 IF OBJECT_ID ('silver.crm_cust_info', 'u') IS NOT NULL
 	DROP TABLE silver.crm_cust_info;
 CREATE TABLE silver.crm_cust_info (
