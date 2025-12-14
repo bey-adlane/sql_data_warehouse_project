@@ -1,3 +1,25 @@
+/*
+===============================================================================
+Procédure stockée : Charger la Silver layer (Bronze → Silver)
+===============================================================================
+Objectif du script :
+
+Cette procédure stockée effectue le processus ETL (Extraction, Transformation, Chargement) pour remplir les tables du schéma « silver » à partir du schéma « bronze ».
+
+Actions effectuées :
+
+- Tronquer les tables Silver.
+
+- Insérer les données transformées et nettoyées de Bronze dans les tables Silver.
+
+Paramètres :
+
+Aucun.
+
+Cette procédure stockée n'accepte aucun paramètre et ne renvoie aucune valeur.
+
+===============================================================================
+*/
 CREATE OR ALTER PROCEDURE silver.load_silver AS
 BEGIN
 	DECLARE @start_time DATETIME, @end_time DATETIME, @batch_start_time DATETIME, @batch_end_time DATETIME
