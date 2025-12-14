@@ -1,0 +1,67 @@
+# 📚 Catalogue de Données pour Gold Layer
+
+## Vue d'ensemble
+
+La *Gold Layer* représente les données au niveau métier, structurées pour prendre en charge les cas d'utilisation d'analyse et de *reporting*. Elle est composée de **tables de dimensions** et de (*fact tables*) pour des indicateurs métier spécifiques.
+
+
+
+---
+
+## 1. `gold.dim_customers`
+
+### 🎯 Objectif
+Stocke les détails des clients enrichis avec des données démographiques et géographiques.
+
+| Nom de Colonne | Type de Donnée | Description |
+| :--- | :--- | :--- |
+| **`customer_key`** | `INT` | Clé de substitution (*Surrogate Key*) identifiant de manière unique chaque enregistrement client dans la table de dimension. |
+| **`customer_id`** | `INT` | Identifiant numérique unique attribué à chaque client. |
+| **`customer_number`** | `NVARCHAR(50)` | Identifiant alphanumérique représentant le client, utilisé pour le suivi et le référencement. |
+| **`first_name`** | `NVARCHAR(50)` | Le prénom du client, tel qu'enregistré dans le système. |
+| **`last_name`** | `NVARCHAR(50)` | Le nom de famille du client. |
+| **`country`** | `NVARCHAR(50)` | Le pays de résidence du client (ex: 'Australie', 'France'). |
+| **`marital_status`** | `NVARCHAR(50)` | L'état civil du client (ex: 'Married', 'Single' - *Marié*, *Célibataire*). |
+| **`gender`** | `NVARCHAR(50)` | Le genre du client (ex: 'Male', 'Female', 'n/a' - *Masculin*, *Féminin*, *n/a*). |
+| **`birthdate`** | `DATE` | La date de naissance du client, formatée en AAAA-MM-JJ (ex: 1971-10-06). |
+| **`create_date`** | `DATE` | La date et l'heure de création de l'enregistrement client dans le système. |
+
+---
+
+## 2. `gold.dim_products` (Dimension Produits)
+
+### 🎯 Objectif
+Fournit des informations sur les produits et leurs attributs.
+
+| Nom de Colonne | Type de Donnée | Description |
+| :--- | :--- | :--- |
+| **`product_key`** | `INT` | Clé de substitution (*Surrogate Key*) identifiant de manière unique chaque enregistrement de produit dans la table de dimension. |
+| **`product_id`** | `INT` | Identifiant unique attribué au produit pour le suivi et le référencement interne. |
+| **`product_number`** | `NVARCHAR(50)` | Code alphanumérique structuré représentant le produit, souvent utilisé pour la catégorisation ou l'inventaire. |
+| **`product_name`** | `NVARCHAR(50)` | Nom descriptif du produit, incluant les détails clés tels que le type, la couleur et la taille. |
+| **`category_id`** | `NVARCHAR(50)` | Un identifiant unique pour la catégorie du produit, le liant à sa classification de haut niveau. |
+| **`category`** | `NVARCHAR(50)` | La classification plus large du produit (ex: *Bikes*, *Components* - Vélos, Composants) pour regrouper les articles connexes. |
+| **`subcategory`** | `NVARCHAR(50)` | Une classification plus détaillée du produit au sein de la catégorie, comme le type de produit. |
+| **`maintenance_required`** | `NVARCHAR(50)` | Indique si le produit nécessite un entretien (ex: 'Yes', 'No' - *Oui*, *Non*). |
+| **`cost`** | `INT` | Le coût ou le prix de base du produit, mesuré en unités monétaires. |
+| **`product_line`** | `NVARCHAR(50)` | La ligne ou série de produits spécifique à laquelle le produit appartient (ex: *Road*, *Mountain* - Route, Montagne). |
+| **`start_date`** | `DATE` | La date à laquelle le produit est devenu disponible à la vente ou à l'utilisation. |
+
+---
+
+## 3. `gold.fact_sales` (Table de Faits des Ventes)
+
+### 🎯 Objectif
+Stocke les données transactionnelles des ventes à des fins d'analyse.
+
+| Nom de Colonne | Type de Donnée | Description |
+| :--- | :--- | :--- |
+| **`order_number`** | `NVARCHAR(50)` | Un identifiant alphanumérique unique pour chaque commande de vente (ex: 'SO54496'). |
+| **`product_key`** | `INT` | Clé de substitution liant la commande à la table de dimension des produits. |
+| **`customer_key`** | `INT` | Clé de substitution liant la commande à la table de dimension des clients. |
+| **`order_date`** | `DATE` | La date à laquelle la commande a été passée. |
+| **`shipping_date`** | `DATE` | La date à laquelle la commande a été expédiée au client. |
+| **`due_date`** | `DATE` | La date d'échéance du paiement de la commande. |
+| **`sales_amount`** | `INT` | La valeur monétaire totale de la vente pour l'article de ligne, en unités monétaires entières (ex: 25). |
+| **`quantity`** | `INT` | Le nombre d'unités du produit commandé pour l'article de ligne (ex: 1). |
+| **`price`** | `INT` | Le prix unitaire du produit pour l'article de ligne, en unités monétaires entières (ex: 25). |
